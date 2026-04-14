@@ -891,28 +891,25 @@ footer {
     <h3>Demande d'information</h3>
     <form name="contact" method="POST" data-netlify="true">
       <input type="hidden" name="form-name" value="contact">
-      <div class="frow">
-        <div class="fg"><label>Prénom</label><input type="text" placeholder="Votre prénom"></div>
-        <div class="fg"><label>Nom</label><input type="text" placeholder="Votre nom"></div>
-      </div>
-      <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
-      <div class="fg"><label>Téléphone</label><input type="tel" placeholder="+212 6XX XXX XXX"></div>
-      <div class="fg">
-        <label>Quartier du bien</label>
-        <select>
-          <option value="" disabled selected>Sélectionnez</option>
-          <option>Maarif</option>
-          <option>Gauthier</option>
-          <option>Anfa</option>
-          <option>CIL</option>
-          <option>Ain Diab</option>
-          <option>Autre quartier</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>Message</label>
-        <textarea placeholder="Décrivez brièvement votre bien..."></textarea>
-      </div>
+     <div class="frow">
+  <div class="fg"><label>Prénom</label><input type="text" name="prenom" placeholder="Votre prénom"></div>
+  <div class="fg"><label>Nom</label><input type="text" name="nom" placeholder="Votre nom"></div>
+</div>
+<div class="fg"><label>Email</label><input type="email" name="email" placeholder="votre@email.com"></div>
+<div class="fg"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+212 6XX XXX XXX"></div>
+<div class="fg">
+  <label>Quartier du bien</label>
+  <select name="quartier">
+    <option value="" disabled selected>Sélectionnez</option>
+    <option>Maarif</option>
+    <option>Gauthier</option>
+    <option>Anfa</option>
+    <option>CIL</option>
+    <option>Ain Diab</option>
+    <option>Autre quartier</option>
+  </select>
+</div>
+<div class="fg"><label>Message</label><textarea name="message" placeholder="Décrivez brièvement votre bien..."></textarea></div>
       <button type="submit" class="btn btn-gold">Envoyer</button>
     </form>
   </div>
