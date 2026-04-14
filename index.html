@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Azra Property — Gestion locative à Casablanca. Confiez votre bien, percevez vos revenus.">
+<title>Azra Property</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─ RESET & BASE ─ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  font-family:'DM Sans', sans-serif;
+  background:#fff;
+  color:#1A2834;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─ VARIABLES ─ */
+:root {
+  --navy: #0D1B2A;
+  --gold: #D4B896;
+  --off:  #F7F5F2;
+  --mid:  #6B7A8A;
+  --border: rgba(212,184,150,.18);
+}
+
+/* ─ HEADER ─ */
+header {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:66px; padding:0 56px;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background .4s, border-color .4s;
+  border-bottom:1px solid transparent;
+}
+header.scrolled {
+  background:rgba(13,27,42,.97);
+  border-bottom-color:rgba(212,184,150,.12);
+}
+.logo {
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none;
+}
+/* ZONE LOGO — remplacer l'img src par votre fichier logo */
+.logo img {
+  height:36px; width:auto; display:block;
+}
+.logo-text {
+  display:flex; flex-direction:column;
+}
+.logo-text b {
+  font-family:'DM Serif Display', serif;
+  font-size:18px; font-weight:400;
+  color:#D4B896; letter-spacing:2px;
+  line-height:1.1;
+}
+.logo-text span {
+  font-family:'DM Sans', sans-serif;
+  font-size:8px; font-weight:300;
+  color:rgba(212,184,150,.55);
+  letter-spacing:4px; text-transform:uppercase;
+}
+nav { display:flex; align-items:center; gap:36px; }
+nav a {
+  font-family:'DM Sans', sans-serif;
+  font-size:12px; font-weight:400;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+  text-decoration:none; transition:color .2s;
+}
+nav a:hover { color:var(--gold); }
+.nav-cta {
+  border:1px solid rgba(212,184,150,.4);
+  color:var(--gold) !important;
+  padding:9px 22px;
+  transition:background .2s, color .2s !important;
+}
+.nav-cta:hover {
+  background:var(--gold) !important;
+  color:var(--navy) !important;
+}
+
+/* ─ HERO ─ */
+.hero {
+  height:100vh; min-height:680px;
+  background:var(--navy);
+  display:flex; align-items:center;
+  position:relative; overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  /* ZONE IMAGE HERO — remplacer l'URL par votre image */
+  background:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1800&q=80') center/cover;
+  opacity:.1;
+}
+.hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(110deg, rgba(13,27,42,1) 45%, rgba(13,27,42,.55));
+}
+.hero-content {
+  position:relative; z-index:2;
+  padding:0 56px; max-width:720px;
+}
+.hero-tag {
+  font-family:'DM Sans', sans-serif;
+  font-size:11px; font-weight:400;
+  letter-spacing:3.5px; text-transform:uppercase;
+  color:rgba(212,184,150,.65);
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:32px;
+}
+.hero-tag::before {
+  content:''; width:28px; height:1px;
+  background:var(--gold); opacity:.6; flex-shrink:0;
+}
+.hero h1 {
+  font-family:'DM Serif Display', serif;
+  font-size:clamp(50px, 6vw, 80px);
+  font-weight:400; color:#fff;
+  line-height:1.08; letter-spacing:-.5px;
+  margin-bottom:28px;
+}
+.hero h1 span {
+  color:var(--gold);
+}
+.hero p {
+  font-family:'DM Sans', sans-serif;
+  font-size:16px; font-weight:300;
+  color:rgba(255,255,255,.52);
+  line-height:1.85; max-width:460px;
+  margin-bottom:48px;
+}
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+.btn {
+  font-family:'DM Sans', sans-serif;
+  font-size:11px; font-weight:500;
+  letter-spacing:2px; text-transform:uppercase;
+  text-decoration:none; display:inline-block;
+  padding:14px 32px; transition:all .2s; border:none; cursor:pointer;
+}
+.btn-gold { background:var(--gold); color:var(--navy); }
+.btn-gold:hover { background:#e0c9a8; }
+.btn-ghost { border:1px solid rgba(255,255,255,.22); color:rgba(255,255,255,.7); }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+.hero-numbers {
+  position:absolute; bottom:52px; right:56px; z-index:2;
+  display:flex; gap:48px;
+}
+.hnum { text-align:right; }
+.hnum-val {
+  font-family:'DM Serif Display', serif;
+  font-size:38px; font-weight:400;
+  color:var(--gold); display:block; line-height:1;
+}
+.hnum-lbl {
+  font-family:'DM Sans', sans-serif;
+  font-size:10px; font-weight:300;
+  letter-spacing:2px; color:rgba(255,255,255,.3);
+  text-transform:uppercase; display:block; margin-top:6px;
+}
+
+/* ─ SECTIONS ─ */
+.sec { padding:112px 56px; }
+.sec-off { background:var(--off); }
+.sec-navy { background:var(--navy); }
+.tag {
+  font-family:'DM Sans', sans-serif;
+  font-size:10px; font-weight:500;
+  letter-spacing:3.5px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:18px;
+  display:flex; align-items:center; gap:12px;
+}
+.tag::before {
+  content:''; width:20px; height:1px;
+  background:var(--gold); display:block; flex-shrink:0;
+}
+.tag-lt { color:rgba(212,184,150,.6); }
+.tag-lt::before { background:rgba(212,184,150,.45); }
+h2 {
+  font-family:'DM Serif Display', serif;
+  font-size:clamp(36px, 4vw, 52px);
+  font-weight:400; line-height:1.12; letter-spacing:-.3px;
+}
+h2 span { color:var(--gold); }
+h2.lgt { color:#fff; }
+.body {
+  font-family:'DM Sans', sans-serif;
+  font-size:15px; font-weight:300;
+  color:var(--mid); line-height:1.9;
+}
+.body-lt { color:rgba(255,255,255,.45); }
+
+/* ─ ABOUT ─ */
+.about-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:100px; align-items:center;
+}
+.about-img { position:relative; }
+.about-img img {
+  width:100%; aspect-ratio:4/5;
+  object-fit:cover; display:block;
+}
+/* ZONE IMAGE ABOUT */
+.about-badge {
+  position:absolute; bottom:-20px; left:28px;
+  background:var(--navy); padding:22px 28px;
+}
+.about-badge strong {
+  font-family:'DM Serif Display', serif;
+  font-size:32px; font-weight:400;
+  color:var(--gold); display:block; line-height:1;
+}
+.about-badge span {
+  font-family:'DM Sans', sans-serif;
+  font-size:9px; font-weight:300;
+  letter-spacing:2.5px; color:rgba(255,255,255,.35);
+  text-transform:uppercase; display:block; margin-top:5px;
+}
+.about-text h2 { margin:16px 0 24px; }
+.about-text .body { max-width:480px; margin-bottom:44px; }
+.about-vals {
+  display:grid; grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--border);
+}
+.av {
+  padding:18px 24px 18px 0;
+  border-bottom:1px solid var(--border);
+}
+.av:nth-child(even) {
+  padding-left:24px; padding-right:0;
+  border-left:1px solid var(--border);
+}
+.av h4 {
+  font-family:'DM Serif Display', serif;
+  font-size:17px; font-weight:400;
+  color:#1A2834; margin-bottom:5px;
+}
+.av p {
+  font-family:'DM Sans', sans-serif;
+  font-size:12px; font-weight:300;
+  color:var(--mid); line-height:1.7;
+}
+
+/* ─ SERVICES ─ */
+.svc-hd {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:60px; align-items:end; margin-bottom:72px;
+}
+.svc-hd h2 { margin-top:14px; }
+.svc-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+.svc-item {
+  padding:42px 36px;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-right:1px solid rgba(255,255,255,.05);
+  position:relative; transition:background .3s;
+}
+.svc-item:nth-child(3n) { border-right:none; }
+.svc-item::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:1px;
+  background:var(--gold);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s;
+}
+.svc-item:hover::before { transform:scaleX(1); }
+.svc-item:hover { background:rgba(255,255,255,.03); }
+.svc-n {
+  font-family:'DM Sans', sans-serif;
+  font-size:10px; font-weight:300;
+  letter-spacing:2.5px; color:rgba(212,184,150,.3);
+  display:block; margin-bottom:20px;
+}
+.svc-item h3 {
+  font-family:'DM Serif Display', serif;
+  font-size:20px; font-weight:400;
+  color:#fff; margin-bottom:12px; line-height:1.25;
+}
+.svc-item p {
+  font-family:'DM Sans', sans-serif;
+  font-size:13px; font-weight:300;
+  color:rgba(255,255,255,.36); line-height:1.8;
+}
+
+/* ─ LOGEMENTS ─ */
+.lmt-hd {
+  display:flex; justify-content:space-between;
+  align-items:flex-end; margin-bottom:56px; gap:32px;
+}
+.lmt-hd h2 { margin-top:14px; }
+
+/* Grille éditoriale asymétrique */
+.lmt-grid {
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  grid-template-rows:340px 240px;
+  gap:10px;
+}
+.lmt-card { position:relative; overflow:hidden; }
+.lmt-card.big { grid-row:span 2; }
+.lmt-card img {
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+  transition:transform .65s cubic-bezier(.25,.46,.45,.94);
+  filter:brightness(.9);
+}
+.lmt-card:hover img { transform:scale(1.04); filter:brightness(1); }
+.lmt-cap {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:32px 22px 20px;
+  background:linear-gradient(to top, rgba(13,27,42,.88), transparent);
+  transform:translateY(6px);
+  transition:transform .3s;
+}
+.lmt-card:hover .lmt-cap { transform:translateY(0); }
+.lmt-city {
+  font-family:'DM Sans', sans-serif;
+  font-size:9px; font-weight:500;
+  letter-spacing:3px; color:var(--gold);
+  text-transform:uppercase; display:block; margin-bottom:5px;
+}
+.lmt-name {
+  font-family:'DM Serif Display', serif;
+  font-size:18px; font-weight:400;
+  color:#fff; display:block; margin-bottom:8px;
+}
+.lmt-meta { display:flex; gap:10px; }
+.lmt-meta span {
+  font-family:'DM Sans', sans-serif;
+  font-size:10px; font-weight:300;
+  color:rgba(255,255,255,.48);
+}
+.lmt-note {
+  margin-top:20px;
+  font-family:'DM Sans', sans-serif;
+  font-size:12px; font-weight:300;
+  color:var(--mid);
+}
+
+/* ─ OWNERS ─ */
+.own-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  min-height:580px; overflow:hidden;
+}
+.own-img { position:relative; }
+.own-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.own-img::after {
+  content:''; position:absolute; inset:0;
+  background:rgba(13,27,42,.28);
+}
+.own-cnt {
+  background:var(--off);
+  padding:88px 72px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.own-cnt h2 { margin:14px 0 20px; }
+.own-cnt .body { max-width:420px; margin-bottom:44px; }
+.own-steps { display:flex; flex-direction:column; margin-bottom:44px; }
+.own-step {
+  display:flex; gap:22px; padding:20px 0;
+  border-bottom:1px solid rgba(212,184,150,.18);
+}
+.own-step:last-child { border-bottom:none; }
+.step-n {
+  font-family:'DM Serif Display', serif;
+  font-size:28px; font-weight:400;
+  color:var(--gold); opacity:.4;
+  line-height:1; min-width:24px; padding-top:2px;
+}
+.step-b h4 {
+  font-family:'DM Sans', sans-serif;
+  font-size:13px; font-weight:500;
+  color:#1A2834; margin-bottom:4px;
+}
+.step-b p {
+  font-family:'DM Sans', sans-serif;
+  font-size:13px; font-weight:300;
+  color:var(--mid); line-height:1.7;
+}
+
+/* ─ ENGAGEMENTS ─ */
+.eng-hd {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:60px; align-items:end; margin-bottom:64px;
+}
+.eng-hd h2 { margin-top:14px; }
+.eng-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border:1px solid rgba(212,184,150,.1);
+}
+.eng-item {
+  padding:36px 28px;
+  border-right:1px solid rgba(212,184,150,.1);
+}
+.eng-item:last-child { border-right:none; }
+.eng-line {
+  width:18px; height:1px;
+  background:var(--gold); opacity:.4; margin-bottom:16px;
+}
+.eng-item h4 {
+  font-family:'DM Serif Display', serif;
+  font-size:18px; font-weight:400;
+  color:#fff; margin-bottom:10px; line-height:1.25;
+}
+.eng-item p {
+  font-family:'DM Sans', sans-serif;
+  font-size:12px; font-weight:300;
+  color:rgba(255,255,255,.35); line-height:1.8;
+}
+
+/* ─ CONTACT ─ */
+.contact-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:0; overflow:hidden;
+}
+.contact-left {
+  background:var(--navy); padding:88px 72px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.contact-left h2 { margin:14px 0 18px; }
+.contact-left .body-lt { max-width:340px; margin-bottom:44px; font-size:14px; }
+.c-item { display:flex; gap:14px; align-items:flex-start; margin-bottom:24px; }
+.c-ico {
+  width:32px; height:32px; flex-shrink:0;
+  border:1px solid rgba(212,184,150,.2);
+  display:flex; align-items:center; justify-content:center;
+}
+.c-ico svg { width:13px; height:13px; stroke:var(--gold); fill:none; stroke-width:1.2; }
+.c-item h5 {
+  font-family:'DM Sans', sans-serif;
+  font-size:9px; font-weight:500;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:rgba(255,255,255,.25); margin-bottom:3px;
+}
+.c-item p {
+  font-family:'DM Sans', sans-serif;
+  font-size:13px; font-weight:300;
+  color:rgba(255,255,255,.68);
+}
+.contact-right {
+  background:var(--off); padding:88px 72px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.contact-right h3 {
+  font-family:'DM Serif Display', serif;
+  font-size:26px; font-weight:400;
+  color:#1A2834; margin-bottom:36px;
+}
+.fg { margin-bottom:22px; }
+.fg label {
+  font-family:'DM Sans', sans-serif;
+  font-size:9px; font-weight:500;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--mid); display:block; margin-bottom:8px;
+}
+.fg input, .fg select, .fg textarea {
+  width:100%; border:none;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  background:transparent; padding:10px 0;
+  font-family:'DM Sans', sans-serif;
+  font-size:14px; font-weight:300;
+  color:#1A2834; outline:none;
+  transition:border-color .2s;
+  -webkit-appearance:none; border-radius:0;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-bottom-color:var(--gold);
+}
+.fg textarea { resize:none; height:80px; }
+.frow { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+
+/* ─ FOOTER ─ */
+footer {
+  background:var(--navy);
+  border-top:1px solid rgba(212,184,150,.08);
+  padding:56px 56px 36px;
+}
+.ft-grid {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:56px; margin-bottom:48px;
+}
+.ft-brand .logo { margin-bottom:16px; }
+.ft-brand p {
+  font-family:'DM Sans', sans-serif;
+  font-size:12px; font-weight:300;
+  color:rgba(255,255,255,.28); line-height:1.85;
+  max-width:240px;
+}
+.ft-col h5 {
+  font-family:'DM Sans', sans-serif;
+  font-size:9px; font-weight:500;
+  letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,.22); margin-bottom:16px;
+}
+.ft-col ul { list-style:none; }
+.ft-col li { margin-bottom:9px; }
+.ft-col a {
+  font-family:'DM Sans', sans-serif;
+  font-size:12px; font-weight:300;
+  color:rgba(255,255,255,.4); text-decoration:none;
+  transition:color .2s;
+}
+.ft-col a:hover { color:var(--gold); }
+.ft-bot {
+  border-top:1px solid rgba(255,255,255,.05);
+  padding-top:24px;
+  display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:12px;
+}
+.ft-bot p {
+  font-family:'DM Sans', sans-serif;
+  font-size:11px; font-weight:300;
+  color:rgba(255,255,255,.18);
+}
+.ft-bot a {
+  font-family:'DM Sans', sans-serif;
+  font-size:11px; font-weight:300;
+  color:rgba(255,255,255,.28); text-decoration:none;
+  transition:color .2s;
+}
+.ft-bot a:hover { color:var(--gold); }
+.ft-links { display:flex; gap:20px; }
+
+/* ─ REVEAL ─ */
+.rv { opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; }
+.rv.in { opacity:1; transform:none; }
+.d1 { transition-delay:.08s; }
+.d2 { transition-delay:.16s; }
+.d3 { transition-delay:.24s; }
+
+/* ─ RESPONSIVE ─ */
+@media (max-width:1100px) {
+  header { padding:0 36px; }
+  .sec { padding:88px 36px; }
+  .hero-content { padding:0 36px; }
+  .hero-numbers { right:36px; gap:32px; }
+  .about-grid { grid-template-columns:1fr; gap:56px; }
+  .about-img img { aspect-ratio:16/9; }
+  .svc-hd { grid-template-columns:1fr; gap:20px; }
+  .svc-grid { grid-template-columns:1fr 1fr; }
+  .lmt-hd { flex-direction:column; align-items:flex-start; }
+  .lmt-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+  .lmt-card.big { grid-row:span 1; }
+  .lmt-card img { min-height:260px; }
+  .own-grid { grid-template-columns:1fr; }
+  .own-img { min-height:380px; }
+  .own-cnt { padding:64px 40px; }
+  .eng-hd { grid-template-columns:1fr; gap:20px; }
+  .eng-grid { grid-template-columns:1fr 1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+  .contact-left { padding:64px 40px; }
+  .contact-right { padding:64px 40px; }
+  .ft-grid { grid-template-columns:1fr 1fr; gap:40px; }
+}
+@media (max-width:768px) {
+  header { padding:0 20px; }
+  nav a:not(.nav-cta) { display:none; }
+  .sec { padding:64px 20px; }
+  .hero-content { padding:0 20px; }
+  .hero-numbers { display:none; }
+  .svc-grid { grid-template-columns:1fr; }
+  .lmt-grid { grid-template-columns:1fr; }
+  .eng-grid { grid-template-columns:1fr; }
+  .frow { grid-template-columns:1fr; }
+  .ft-grid { grid-template-columns:1fr; }
+  .ft-bot { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <a href="#" class="logo">
+    <!-- LOGO : placez logo.png dans le même dossier que ce fichier -->
+    <img src="logo.png" alt="Azra Property"
+         style="height:38px;width:auto;display:block;"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="logo-text" style="display:none;">
+      <b>AZRA</b><span>Property</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#logements">Logements</a>
+    <a href="#proprietaires">Propriétaires</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Casablanca — Gestion locative</div>
+    <h1>Votre bien, <span>bien géré.</span></h1>
+    <p>Nous prenons en charge la gestion complète de votre appartement sur les plateformes de location courte durée. Vous percevez vos revenus. Nous gérons le reste.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-gold">Confier mon bien</a>
+      <a href="#services" class="btn btn-ghost">Nos services</a>
+    </div>
+  </div>
+  <div class="hero-numbers">
+    <div class="hnum">
+      <span class="hnum-val">72h</span>
+      <span class="hnum-lbl">Mise en ligne</span>
+    </div>
+    <div class="hnum">
+      <span class="hnum-val">7j/7</span>
+      <span class="hnum-lbl">Disponibilité</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="apropos">
+  <div class="about-grid">
+    <div class="about-img rv">
+      <!--
+        ZONE IMAGE : remplacez le src par votre photo d'intérieur
+        Taille recommandée : 900x1100px, ratio vertical
+      -->
+      <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80"
+           onerror="this.src='https://images.unsplash.com/photo-1484154218962-a197022b5858?w=900&q=80'"
+           alt="Appartement Casablanca" loading="lazy">
+      <div class="about-badge">
+        <strong>A–Z</strong>
+        <span>Pris en charge</span>
+      </div>
+    </div>
+    <div class="about-text rv d1">
+      <div class="tag">Qui nous sommes</div>
+      <h2>Une gestion <span>rigoureuse,</span><br>de bout en bout.</h2>
+      <p class="body" style="margin-top:20px;">Azra Property gère des appartements à Casablanca pour des propriétaires qui souhaitent valoriser leur bien sans en assumer les contraintes. Annonce, accueil, entretien, communication — nous intervenons à chaque étape avec une équipe opérationnelle sur place.</p>
+      <div class="about-vals" style="margin-top:36px;">
+        <div class="av">
+          <h4>Méthode</h4>
+          <p>Un processus clair à chaque étape, sans improvisation.</p>
+        </div>
+        <div class="av">
+          <h4>Disponibilité</h4>
+          <p>Présence locale, intervention rapide.</p>
+        </div>
+        <div class="av">
+          <h4>Clarté</h4>
+          <p>Relevé mensuel, aucune zone d'ombre sur vos revenus.</p>
+        </div>
+        <div class="av">
+          <h4>Discrétion</h4>
+          <p>Votre bien, votre patrimoine. Nous gérons sans vous imposer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec sec-navy" id="services">
+  <div class="svc-hd rv">
+    <div>
+      <div class="tag tag-lt">Ce que nous faisons</div>
+      <h2 class="lgt" style="margin-top:12px;">Une prise en charge<br><span>sans lacune.</span></h2>
+    </div>
+    <p class="body body-lt" style="max-width:380px;">De la mise en ligne à la remise des clés, chaque aspect de votre location est couvert. Vous n'avez rien à coordonner.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-item rv">
+      <span class="svc-n">01</span>
+      <h3>Annonce & tarification</h3>
+      <p>Rédaction soignée, photos, mise en ligne sur Airbnb et Booking. Tarif ajusté selon la demande.</p>
+    </div>
+    <div class="svc-item rv d1">
+      <span class="svc-n">02</span>
+      <h3>Accueil des voyageurs</h3>
+      <p>Check-in organisé, remise des clés, présentation du logement. Disponibilité pendant le séjour.</p>
+    </div>
+    <div class="svc-item rv d2">
+      <span class="svc-n">03</span>
+      <h3>Entretien après chaque séjour</h3>
+      <p>Ménage complet, linge, réassort des essentiels. Le bien est prêt pour chaque arrivée.</p>
+    </div>
+    <div class="svc-item rv">
+      <span class="svc-n">04</span>
+      <h3>Gestion des échanges</h3>
+      <p>Toutes les communications voyageurs prises en charge. Avis, demandes, résolution des imprévus.</p>
+    </div>
+    <div class="svc-item rv d1">
+      <span class="svc-n">05</span>
+      <h3>Coordination technique</h3>
+      <p>En cas de problème, intervention rapide avec nos prestataires locaux.</p>
+    </div>
+    <div class="svc-item rv d2">
+      <span class="svc-n">06</span>
+      <h3>Suivi mensuel</h3>
+      <p>Relevé complet chaque mois. Vous savez ce que génère votre bien, sans avoir à demander.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOGEMENTS -->
+<section class="sec" id="logements">
+  <div class="lmt-hd rv">
+    <div>
+      <div class="tag">Logements gérés</div>
+      <h2 style="margin-top:12px;">Des biens à <span>Casablanca.</span></h2>
+    </div>
+    <a href="#contact" class="btn btn-gold" style="flex-shrink:0;align-self:flex-end;">
+      Voir les disponibilités
+    </a>
+  </div>
+
+  <div class="lmt-grid">
+    <!--
+      ZONES IMAGES LOGEMENTS
+      Remplacez chaque src par vos propres photos :
+        Photo 1 (grande) → logement-maarif.jpg
+        Photo 2          → logement-gauthier.jpg
+        Photo 3          → logement-cil.jpg
+        Photo 4          → logement-aindiab.jpg
+      Format : JPEG, 1200px min, ratio 4:3 ou 16:9
+    -->
+    <div class="lmt-card big rv">
+      <img src="https://images.unsplash.com/photo-1630699144867-37acec97df5a?w=900&q=80"
+           onerror="this.src='https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80'"
+           alt="Maarif" loading="lazy">
+      <div class="lmt-cap">
+        <span class="lmt-city">Maarif, Casablanca</span>
+        <span class="lmt-name">Studio lumineux</span>
+        <div class="lmt-meta">
+          <span>62 m²</span><span>·</span><span>1 chambre</span><span>·</span><span>Meublé</span>
+        </div>
+      </div>
+    </div>
+    <div class="lmt-card rv d1">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80"
+           onerror="this.src='https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=700&q=80'"
+           alt="Gauthier" loading="lazy">
+      <div class="lmt-cap">
+        <span class="lmt-city">Gauthier, Casablanca</span>
+        <span class="lmt-name">Appartement rénové</span>
+        <div class="lmt-meta">
+          <span>78 m²</span><span>·</span><span>2 chambres</span>
+        </div>
+      </div>
+    </div>
+    <div class="lmt-card rv d2">
+      <img src="https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=700&q=80"
+           onerror="this.src='https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=80'"
+           alt="CIL" loading="lazy">
+      <div class="lmt-cap">
+        <span class="lmt-city">CIL, Casablanca</span>
+        <span class="lmt-name">Grand appartement</span>
+        <div class="lmt-meta">
+          <span>105 m²</span><span>·</span><span>3 chambres</span>
+        </div>
+      </div>
+    </div>
+    <div class="lmt-card rv d1">
+      <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=700&q=80"
+           onerror="this.src='https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=700&q=80'"
+           alt="Ain Diab" loading="lazy">
+      <div class="lmt-cap">
+        <span class="lmt-city">Ain Diab, Casablanca</span>
+        <span class="lmt-name">Vue corniche</span>
+        <div class="lmt-meta">
+          <span>88 m²</span><span>·</span><span>2 chambres</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="lmt-note rv">Les logements présentés sont des exemples représentatifs des biens que nous gérons. Contactez-nous pour connaître les disponibilités actuelles.</p>
+</section>
+
+<!-- OWNERS -->
+<div class="own-grid" id="proprietaires">
+  <div class="own-img">
+    <!--
+      ZONE IMAGE PROPRIÉTAIRES
+      Remplacez par : <img src="interieur.jpg" ...>
+    -->
+    <img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=900&q=80"
+         onerror="this.src='https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80'"
+         alt="Bien géré" loading="lazy">
+  </div>
+  <div class="own-cnt">
+    <div class="tag">Pour les propriétaires</div>
+    <h2 style="margin-top:12px;">Vous avez un bien.<br><span>On s'en occupe.</span></h2>
+    <p class="body" style="margin-top:14px;">Que vous viviez à l'étranger ou que vous manquiez de temps, nous prenons en charge la gestion complète de votre appartement. Vous percevez vos revenus. Nous nous occupons du reste, sans que vous ayez à intervenir.</p>
+    <div class="own-steps rv" style="margin-top:36px;">
+      <div class="own-step">
+        <span class="step-n">1</span>
+        <div class="step-b">
+          <h4>Estimation gratuite</h4>
+          <p>Nous analysons votre bien et vous donnons une estimation de revenus sans engagement.</p>
+        </div>
+      </div>
+      <div class="own-step">
+        <span class="step-n">2</span>
+        <div class="step-b">
+          <h4>Mise en ligne sous 72h</h4>
+          <p>Photos, annonce, paramétrage. Votre bien est opérationnel rapidement.</p>
+        </div>
+      </div>
+      <div class="own-step">
+        <span class="step-n">3</span>
+        <div class="step-b">
+          <h4>Gestion continue</h4>
+          <p>Nous gérons tout. Vous recevez un relevé mensuel clair et vos revenus en toute transparence.</p>
+        </div>
+      </div>
+    </div>
+    <a href="#contact" class="btn btn-gold">Nous contacter</a>
+  </div>
+</div>
+
+<!-- ENGAGEMENTS -->
+<section class="sec sec-navy">
+  <div class="eng-hd rv">
+    <div>
+      <div class="tag tag-lt">Notre approche</div>
+      <h2 class="lgt" style="margin-top:12px;">Quatre engagements<br><span>concrets.</span></h2>
+    </div>
+    <p class="body body-lt" style="max-width:360px;">Pas de promesses vagues. Voici ce que nous faisons réellement pour chaque bien que nous gérons.</p>
+  </div>
+  <div class="eng-grid">
+    <div class="eng-item rv">
+      <div class="eng-line"></div>
+      <h4>Rémunération liée aux résultats</h4>
+      <p>Nous sommes rémunérés sur ce que votre bien génère. Notre intérêt est aligné sur le vôtre.</p>
+    </div>
+    <div class="eng-item rv d1">
+      <div class="eng-line"></div>
+      <h4>Équipe locale à Casablanca</h4>
+      <p>Nous intervenons sur le terrain. Pas de gestion à distance approximative.</p>
+    </div>
+    <div class="eng-item rv d2">
+      <div class="eng-line"></div>
+      <h4>Contrat sans engagement long terme</h4>
+      <p>Résiliable à tout moment. Vous gardez le contrôle de votre bien.</p>
+    </div>
+    <div class="eng-item rv d3">
+      <div class="eng-line"></div>
+      <h4>Suivi mensuel systématique</h4>
+      <p>Revenus, occupations, état du bien : tout est documenté chaque mois.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-grid" id="contact">
+  <div class="contact-left">
+    <div class="tag tag-lt">Prendre contact</div>
+    <h2 class="lgt" style="margin-top:12px;">Parlons de<br><span>votre bien.</span></h2>
+    <p class="body body-lt">Réponse sous 24 heures. L'estimation est gratuite et sans engagement.</p>
+    <div style="margin-top:40px;">
+      <div class="c-item">
+        <div class="c-ico">
+          <svg viewBox="0 0 16 16"><path d="M2 3h12v10H2z"/><path d="M2 3l6 6 6-6"/></svg>
+        </div>
+        <div>
+          <h5>Email</h5>
+          <p>contact@azraproperty.com</p>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-ico">
+          <svg viewBox="0 0 16 16"><path d="M3 2h3l1.5 3.5-2 1.5a9 9 0 004.5 4.5l1.5-2L15 11v3c0 .6-.4 1-1 1A13 13 0 012 2c0-.6.4-1 1-1z"/></svg>
+        </div>
+        <div>
+          <h5>WhatsApp</h5>
+          <p>+33 6 72 99 33 45</p>
+          <p style="margin-top:4px;">+33 6 81 25 91 81</p>
+        </div>
+      </div>
+      <div class="c-item">
+        <div class="c-ico">
+          <svg viewBox="0 0 16 16"><path d="M8 1C4.7 1 2 3.7 2 7c0 4.4 6 9 6 9s6-4.6 6-9c0-3.3-2.7-6-6-6z"/><circle cx="8" cy="7" r="2"/></svg>
+        </div>
+        <div>
+          <h5>Localisation</h5>
+          <p>Casablanca, Maroc</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <h3>Demande d'information</h3>
+    <form onsubmit="return false;">
+      <div class="frow">
+        <div class="fg"><label>Prénom</label><input type="text" placeholder="Votre prénom"></div>
+        <div class="fg"><label>Nom</label><input type="text" placeholder="Votre nom"></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" placeholder="+212 6XX XXX XXX"></div>
+      <div class="fg">
+        <label>Quartier du bien</label>
+        <select>
+          <option value="" disabled selected>Sélectionnez</option>
+          <option>Maarif</option>
+          <option>Gauthier</option>
+          <option>Anfa</option>
+          <option>CIL</option>
+          <option>Ain Diab</option>
+          <option>Autre quartier</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Message</label>
+        <textarea placeholder="Décrivez brièvement votre bien..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold">Envoyer</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <!--
+        LOGO FOOTER : même fichier que le header
+      <!-- LOGO FOOTER : même fichier logo.png -->
+      <img src="logo.png" alt="Azra Property"
+           style="height:34px;width:auto;display:block;margin-bottom:14px;"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="logo" style="display:none;margin-bottom:14px;">
+        <div class="logo-text"><b>AZRA</b><span>Property</span></div>
+      </div>
+      <p>Gestion locative courte durée à Casablanca. Nous prenons en charge votre bien avec méthode et discrétion.</p>
+    </div>
+    <div class="ft-col">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#services">Nos services</a></li>
+        <li><a href="#logements">Logements</a></li>
+        <li><a href="#proprietaires">Propriétaires</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#services">Gestion Airbnb</a></li>
+        <li><a href="#services">Gestion Booking</a></li>
+        <li><a href="#services">Mise en valeur</a></li>
+        <li><a href="#services">Suivi mensuel</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Légal</h5>
+      <ul>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p>© 2026 Azra Property. Tous droits réservés.</p>
+    <div class="ft-links">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', scrollY > 50);
+}, { passive:true });
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 55);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
